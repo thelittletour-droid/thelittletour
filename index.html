@@ -264,6 +264,69 @@ footer img { height: 50px; width: auto; }
 }
 .wa-float:hover { transform: scale(1.08); }
 
+/* GALLERY COUNT BADGE */
+.gallery-count {
+  position: absolute; bottom: 1rem; left: 1rem;
+  background: rgba(0,0,0,0.55);
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.72rem;
+  padding: 0.28rem 0.65rem;
+  border-radius: 2px;
+  z-index: 2;
+  backdrop-filter: blur(4px);
+}
+
+/* LIGHTBOX */
+.lightbox {
+  display: none;
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.92);
+  align-items: center; justify-content: center;
+  flex-direction: column;
+}
+.lightbox.active { display: flex; }
+.lightbox-img {
+  max-width: 90vw; max-height: 80vh;
+  object-fit: contain;
+  border-radius: 2px;
+}
+.lightbox-controls {
+  display: flex; align-items: center; gap: 2rem;
+  margin-top: 1.2rem;
+}
+.lightbox-btn {
+  background: none; border: none; color: white;
+  font-size: 2rem; cursor: pointer; opacity: 0.7;
+  transition: opacity .2s; padding: 0.5rem 1rem;
+}
+.lightbox-btn:hover { opacity: 1; }
+.lightbox-close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background: none; border: none; color: white;
+  font-size: 1.8rem; cursor: pointer; opacity: 0.7;
+}
+.lightbox-close:hover { opacity: 1; }
+.lightbox-counter {
+  font-family: 'Mosk', sans-serif;
+  font-size: 0.8rem; color: rgba(255,255,255,0.5);
+  letter-spacing: 0.1em;
+}
+.lightbox-thumbs {
+  display: flex; gap: 0.5rem; margin-top: 1rem;
+  flex-wrap: wrap; justify-content: center;
+  max-width: 90vw;
+}
+.lightbox-thumbs img {
+  height: 52px; width: 52px;
+  object-fit: cover; border-radius: 2px;
+  cursor: pointer; opacity: 0.5;
+  transition: opacity .2s;
+  border: 2px solid transparent;
+}
+.lightbox-thumbs img.active,
+.lightbox-thumbs img:hover { opacity: 1; border-color: var(--teal); }
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .hero { grid-template-columns: 1fr; height: auto; }
@@ -280,7 +343,7 @@ footer img { height: 50px; width: auto; }
 <body>
 
 <nav>
-  <img src="fotos/logo.png" alt="The Little Tour">
+  <a href="#"><img src="fotos/logo.png" alt="The Little Tour"></a>
   <ul>
     <li><a href="#tours">Tours</a></li>
     <li><a href="#nosotros">Nosotros</a></li>
@@ -290,7 +353,7 @@ footer img { height: 50px; width: auto; }
 
 <section class="hero">
   <div class="hero-img">
-    <img src="fotos/volcan-santa-1.jpg" alt="Volcán Santa Ana">
+    <img src="fotos/volcan-santa-2.jpg" alt="Volcán Santa Ana">
   </div>
   <div class="hero-content">
     <p class="hero-label">El Salvador · Tours Privados</p>
@@ -318,11 +381,11 @@ footer img { height: 50px; width: auto; }
   <div class="tours-grid">
 
     <div class="tour-card">
-      <div class="card-imgs">
-        <img class="pri" src="fotos/volcan-santa-1.jpg" alt="Volcán Santa Ana">
-        <img class="sec" src="fotos/volcan-santa-2.jpg" alt="Cráter Volcán Santa Ana">
+      <div class="card-imgs" onclick="openGallery('volcan')" style="cursor:pointer">
+        <img class="pri" src="fotos/volcan-santa-2.jpg" alt="Volcán Santa Ana">
+        <img class="sec" src="fotos/volcan-santa-3.jpg" alt="Cráter Volcán Santa Ana">
         <span class="card-tag">Naturaleza · Aventura</span>
-        
+        <span class="gallery-count">📷 6 fotos</span>
       </div>
       <div class="card-body">
         <p class="card-cat">Cráter Sin Multitudes</p>
@@ -338,11 +401,11 @@ footer img { height: 50px; width: auto; }
     </div>
 
     <div class="tour-card">
-      <div class="card-imgs">
-        <img class="pri" src="fotos/izalco-1.jpg" alt="Volcán Izalco">
-        <img class="sec" src="fotos/izalco-2.jpg" alt="Cerro Verde">
+      <div class="card-imgs" onclick="openGallery('izalco')" style="cursor:pointer">
+        <img class="pri" src="fotos/izalco-2.jpg" alt="Volcán Izalco — cima">
+        <img class="sec" src="fotos/izalco-3.jpg" alt="Volcán Izalco — vista">
         <span class="card-tag">Naturaleza · Mirador</span>
-        
+        <span class="gallery-count">📷 7 fotos</span>
       </div>
       <div class="card-body">
         <p class="card-cat">Cráter Sin Multitudes</p>
@@ -357,11 +420,11 @@ footer img { height: 50px; width: auto; }
     </div>
 
     <div class="tour-card">
-      <div class="card-imgs">
+      <div class="card-imgs" onclick="openGallery('tamanique')" style="cursor:pointer">
         <img class="pri" src="fotos/tamanique-1.jpg" alt="Cascadas de Tamanique">
-        <img class="sec" src="fotos/tamanique-2.jpg" alt="Cascada Tamanique">
+        <img class="sec" src="fotos/tamanique-6.jpg" alt="Cascada Tamanique cañón">
         <span class="card-tag">Agua · Playa · Montaña</span>
-        
+        <span class="gallery-count">📷 7 fotos</span>
       </div>
       <div class="card-body">
         <p class="card-cat">Agua, Roca y Mar</p>
@@ -376,11 +439,11 @@ footer img { height: 50px; width: auto; }
     </div>
 
     <div class="tour-card">
-      <div class="card-imgs">
+      <div class="card-imgs" onclick="openGallery('ruta')" style="cursor:pointer">
         <img class="pri" src="fotos/ruta-flores-1.jpg" alt="Ruta de las Flores">
         <img class="sec" src="fotos/ruta-flores-2.jpg" alt="Pueblo Ruta de las Flores">
         <span class="card-tag">Cultura · Historia</span>
-        
+        <span class="gallery-count">📷 7 fotos</span>
       </div>
       <div class="card-body">
         <p class="card-cat">5 Pueblos, Origen y Tradición</p>
@@ -395,11 +458,11 @@ footer img { height: 50px; width: auto; }
     </div>
 
     <div class="tour-card">
-      <div class="card-imgs">
+      <div class="card-imgs" onclick="openGallery('copan')" style="cursor:pointer">
         <img class="pri" src="fotos/copan-1.jpg" alt="Ruinas de Copán">
         <img class="sec" src="fotos/copan-2.jpg" alt="Escultura Maya Copán">
         <span class="card-tag">Internacional · UNESCO</span>
-        
+        <span class="gallery-count">📷 10 fotos</span>
       </div>
       <div class="card-body">
         <p class="card-cat">La Ciudad Maya Más Escultural de América</p>
@@ -449,6 +512,117 @@ footer img { height: 50px; width: auto; }
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>
 </a>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  <div class="lightbox-controls">
+    <button class="lightbox-btn" onclick="prevPhoto()">&#8592;</button>
+    <span class="lightbox-counter" id="lightbox-counter">1 / 6</span>
+    <button class="lightbox-btn" onclick="nextPhoto()">&#8594;</button>
+  </div>
+  <div class="lightbox-thumbs" id="lightbox-thumbs"></div>
+</div>
+
+<script>
+const galleries = {
+  volcan: [
+    'fotos/volcan-santa-2.jpg',
+    'fotos/volcan-santa-3.jpg',
+    'fotos/volcan-santa-4.jpg',
+    'fotos/volcan-santa-5.jpg',
+    'fotos/volcan-santa-6.jpg',
+    'fotos/volcan-santa-7.jpg',
+  ],
+  izalco: [
+    'fotos/izalco-2.jpg',
+    'fotos/izalco-3.jpg',
+    'fotos/izalco-4.jpg',
+    'fotos/izalco-5.jpg',
+    'fotos/izalco-6.jpg',
+    'fotos/izalco-7.jpg',
+  ],
+  tamanique: [
+    'fotos/tamanique-1.jpg',
+    'fotos/tamanique-2.jpg',
+    'fotos/tamanique-3.jpg',
+    'fotos/tamanique-4.jpg',
+    'fotos/tamanique-5.jpg',
+    'fotos/tamanique-6.jpg',
+    'fotos/tamanique-7.jpg',
+  ],
+  ruta: [
+    'fotos/ruta-flores-1.jpg',
+    'fotos/ruta-flores-2.jpg',
+    'fotos/ruta-flores-3.jpg',
+    'fotos/ruta-flores-4.jpg',
+    'fotos/ruta-flores-5.jpg',
+    'fotos/ruta-flores-6.jpg',
+    'fotos/ruta-flores-7.jpg',
+  ],
+  copan: [
+    'fotos/copan-1.jpg',
+    'fotos/copan-2.jpg',
+    'fotos/copan-3.jpg',
+    'fotos/copan-4.jpg',
+    'fotos/copan-5.jpg',
+    'fotos/copan-6.jpg',
+    'fotos/copan-7.jpg',
+    'fotos/copan-8.jpg',
+    'fotos/copan-9.jpg',
+    'fotos/copan-10.jpg',
+  ]
+};
+
+let currentGallery = [];
+let currentIndex = 0;
+
+function openGallery(name) {
+  currentGallery = galleries[name];
+  currentIndex = 0;
+  showPhoto();
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  const thumbs = document.getElementById('lightbox-thumbs');
+  thumbs.innerHTML = '';
+  currentGallery.forEach((src, i) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.onclick = (e) => { e.stopPropagation(); currentIndex = i; showPhoto(); };
+    if (i === 0) img.classList.add('active');
+    thumbs.appendChild(img);
+  });
+}
+
+function showPhoto() {
+  document.getElementById('lightbox-img').src = currentGallery[currentIndex];
+  document.getElementById('lightbox-counter').textContent = `${currentIndex + 1} / ${currentGallery.length}`;
+  document.querySelectorAll('.lightbox-thumbs img').forEach((img, i) => {
+    img.classList.toggle('active', i === currentIndex);
+  });
+}
+
+function nextPhoto() { currentIndex = (currentIndex + 1) % currentGallery.length; showPhoto(); }
+function prevPhoto() { currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; showPhoto(); }
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function closeLightboxOutside(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+document.addEventListener('keydown', (e) => {
+  if (!document.getElementById('lightbox').classList.contains('active')) return;
+  if (e.key === 'ArrowRight') nextPhoto();
+  if (e.key === 'ArrowLeft') prevPhoto();
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
 
 </body>
 </html>
