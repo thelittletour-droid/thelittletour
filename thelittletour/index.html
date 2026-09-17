@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Little Tour — El Salvador</title>
+<style>
+@font-face{font-family:'Mosk';src:url('fonts/Mosk-900.ttf') format('truetype');font-weight:900}
+@font-face{font-family:'Mosk';src:url('fonts/Mosk-700.ttf') format('truetype');font-weight:700}
+@font-face{font-family:'Mosk';src:url('fonts/Mosk-500.ttf') format('truetype');font-weight:500}
+@font-face{font-family:'Mosk';src:url('fonts/Mosk-400.ttf') format('truetype');font-weight:400}
+@font-face{font-family:'Mosk';src:url('fonts/Mosk-300.ttf') format('truetype');font-weight:300}
+@font-face{font-family:'Lora';src:url('fonts/Lora-Regular.ttf') format('truetype');font-weight:400;font-style:normal}
+@font-face{font-family:'Lora';src:url('fonts/Lora-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal}
+@font-face{font-family:'Lora';src:url('fonts/Lora-Bold.ttf') format('truetype');font-weight:700;font-style:normal}
+@font-face{font-family:'Lora';src:url('fonts/Lora-Italic.ttf') format('truetype');font-weight:400;font-style:italic}
+@font-face{font-family:'Roboto';src:url('fonts/Roboto-Light.ttf') format('truetype');font-weight:300}
+@font-face{font-family:'Roboto';src:url('fonts/Roboto-Regular.ttf') format('truetype');font-weight:400}
+@font-face{font-family:'Roboto';src:url('fonts/Roboto-Medium.ttf') format('truetype');font-weight:500}
+@font-face{font-family:'Roboto';src:url('fonts/Roboto-Bold.ttf') format('truetype');font-weight:700}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --teal: #53A69D;
+  --teal-dark: #3D7D76;
+  --negro: #202020;
+  --gris: #F2F2F2;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Roboto', sans-serif; color: var(--negro); background: #fff; line-height: 1.6; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--negro);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5vw; height: 64px;
+}
+nav img { height: 48px; width: auto; }
+nav ul { display: flex; gap: 2rem; list-style: none; }
+nav ul a {
+  color: rgba(255,255,255,0.7); text-decoration: none;
+  font-family: 'Mosk', sans-serif; font-weight: 400;
+  font-size: 0.8rem; letter-spacing: 0.05em; transition: color .2s;
+}
+nav ul a:hover { color: var(--teal); }
+.nav-wa {
+  background: var(--teal) !important; color: white !important;
+  padding: 0.4rem 1.1rem; border-radius: 2px; font-weight: 700 !important;
+}
+.nav-wa:hover { background: var(--teal-dark) !important; }
+
+/* HERO */
+.hero {
+  margin-top: 64px; height: calc(100vh - 64px);
+  min-height: 520px; display: grid;
+  grid-template-columns: 55% 45%; overflow: hidden;
+}
+.hero-img { position: relative; overflow: hidden; }
+.hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.15), transparent);
+}
+.hero-content {
+  background: var(--negro);
+  display: flex; flex-direction: column;
+  justify-content: center; padding: 4vw 5vw;
+}
+.hero-label {
+  font-family: 'Mosk', sans-serif; font-weight: 400;
+  font-size: 0.72rem; color: var(--teal);
+  letter-spacing: 0.14em; margin-bottom: 1.4rem;
+}
+.hero-title {
+  font-family: 'Mosk', sans-serif; font-weight: 900;
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  color: white; line-height: 1.1; margin-bottom: 0.6rem;
+}
+.hero-tagline {
+  font-family: 'Lora', serif; font-weight: 400; font-style: italic;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  color: var(--teal); margin-bottom: 1.4rem;
+}
+.hero-desc {
+  font-family: 'Roboto', sans-serif; font-weight: 300;
+  font-size: 0.9rem; color: rgba(255,255,255,0.6);
+  line-height: 1.75; max-width: 36ch; margin-bottom: 2.2rem;
+}
+.hero-cta {
+  display: inline-block; background: var(--teal);
+  color: white; text-decoration: none;
+  font-family: 'Mosk', sans-serif; font-weight: 700;
+  font-size: 0.8rem; letter-spacing: 0.06em;
+  padding: 0.85rem 2rem; border-radius: 2px;
+  align-self: flex-start; transition: background .2s;
+}
+.hero-cta:hover { background: var(--teal-dark); }
+
+/* STRIP */
+.strip {
+  background: var(--teal);
+  display: flex; align-items: center;
+  justify-content: center;
+  gap: 3.5rem; padding: 1.4rem 5vw; flex-wrap: wrap;
+}
+.strip-item {
+  font-family: 'Mosk', sans-serif; font-weight: 500;
+  font-size: 0.78rem; color: white; letter-spacing: 0.04em;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.strip-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.5); flex-shrink: 0;
+}
+
+/* SECTION HEAD */
+.sec-head { text-align: center; padding: 5rem 5vw 3rem; }
+.sec-label {
+  font-family: 'Mosk', sans-serif; font-weight: 400;
+  font-size: 0.7rem; color: var(--teal);
+  letter-spacing: 0.16em; margin-bottom: 0.8rem;
+}
+.sec-title {
+  font-family: 'Mosk', sans-serif; font-weight: 900;
+  font-size: clamp(1.8rem, 2.8vw, 2.5rem);
+  line-height: 1.15; color: var(--negro);
+}
+.sec-sub {
+  font-family: 'Lora', serif; font-style: italic;
+  font-size: 1rem; color: #888; margin-top: 0.6rem;
+}
+
+/* TOURS GRID */
+.tours-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1px; background: #E8E8E8;
+  margin: 0 5vw 6rem; border: 1px solid #E8E8E8;
+}
+.tour-card {
+  background: white; display: flex; flex-direction: column;
+  transition: transform .25s, box-shadow .25s; position: relative;
+}
+.tour-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.10); z-index: 2;
+}
+.card-imgs { position: relative; height: 260px; overflow: hidden; }
+.card-imgs img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; transition: opacity .5s;
+}
+.card-imgs img.sec { opacity: 0; }
+.tour-card:hover .card-imgs img.pri { opacity: 0; }
+.tour-card:hover .card-imgs img.sec { opacity: 1; }
+.card-tag {
+  position: absolute; top: 1rem; left: 1rem;
+  background: var(--negro); color: white;
+  font-family: 'Mosk', sans-serif; font-weight: 500;
+  font-size: 0.65rem; letter-spacing: 0.08em;
+  padding: 0.28rem 0.65rem; z-index: 2;
+}
+.card-price {
+  position: absolute; bottom: 1rem; right: 1rem;
+  background: var(--teal); color: white;
+  font-family: 'Mosk', sans-serif; font-weight: 900;
+  font-size: 1.05rem; padding: 0.35rem 0.85rem;
+  z-index: 2; line-height: 1;
+}
+.card-price small {
+  font-weight: 400; font-size: 0.62rem;
+  opacity: 0.85; display: block; margin-top: 1px;
+}
+.card-body { padding: 1.3rem 1.4rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.card-cat {
+  font-family: 'Mosk', sans-serif; font-weight: 500;
+  font-size: 0.65rem; color: var(--teal);
+  letter-spacing: 0.1em; margin-bottom: 0.4rem;
+}
+.card-title {
+  font-family: 'Mosk', sans-serif; font-weight: 700;
+  font-size: 1.05rem; line-height: 1.25;
+  color: var(--negro); margin-bottom: 0.65rem;
+}
+.card-desc {
+  font-family: 'Roboto', sans-serif; font-weight: 300;
+  font-size: 0.82rem; color: #666;
+  line-height: 1.65; flex: 1; margin-bottom: 1.1rem;
+}
+.card-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+.meta-i {
+  font-family: 'Roboto', sans-serif; font-size: 0.72rem; color: #999;
+  display: flex; align-items: center; gap: 0.3rem;
+}
+.card-btn {
+  display: block; text-align: center;
+  background: var(--negro); color: white; text-decoration: none;
+  font-family: 'Mosk', sans-serif; font-weight: 700;
+  font-size: 0.75rem; letter-spacing: 0.07em;
+  padding: 0.75rem; transition: background .2s;
+}
+.card-btn:hover { background: var(--teal); }
+
+/* PROMISE */
+.promise {
+  background: var(--negro); padding: 6rem 5vw;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+}
+.promise-img { height: 460px; overflow: hidden; border-radius: 1px; }
+.promise-img img { width: 100%; height: 100%; object-fit: cover; }
+.promise-label {
+  font-family: 'Mosk', sans-serif; font-weight: 400;
+  font-size: 0.7rem; color: var(--teal);
+  letter-spacing: 0.16em; margin-bottom: 1.2rem;
+}
+.promise-title {
+  font-family: 'Mosk', sans-serif; font-weight: 900;
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  color: white; line-height: 1.15; margin-bottom: 0.8rem;
+}
+.promise-quote {
+  font-family: 'Lora', serif; font-style: italic;
+  font-size: 1.05rem; color: var(--teal);
+  line-height: 1.6; margin-bottom: 2rem;
+  padding-left: 1.2rem; border-left: 2px solid var(--teal);
+}
+.promise-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+.promise-list li {
+  display: flex; gap: 0.9rem; align-items: flex-start;
+  font-family: 'Roboto', sans-serif; font-weight: 300;
+  font-size: 0.88rem; color: rgba(255,255,255,0.65); line-height: 1.65;
+}
+.promise-list li::before {
+  content: ''; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--teal); flex-shrink: 0; margin-top: 3px;
+}
+
+/* FOOTER */
+footer {
+  background: var(--negro); padding: 2.5rem 5vw;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; gap: 1.5rem;
+  border-top: 3px solid var(--teal);
+}
+footer img { height: 50px; width: auto; }
+.footer-right {
+  text-align: right; font-family: 'Roboto', sans-serif;
+  font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.8;
+}
+.footer-right a { color: var(--teal); text-decoration: none; font-weight: 500; }
+
+/* WA FLOAT */
+.wa-float {
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+  background: #25D366; border-radius: 50%;
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+  text-decoration: none; transition: transform .2s;
+}
+.wa-float:hover { transform: scale(1.08); }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; height: auto; }
+  .hero-img { height: 52vw; min-height: 240px; }
+  .hero-content { padding: 2.5rem 6vw 3rem; }
+  nav ul { display: none; }
+  .promise { grid-template-columns: 1fr; gap: 2.5rem; }
+  .promise-img { height: 240px; }
+  .tours-grid { grid-template-columns: 1fr; margin: 0 3vw 4rem; }
+  .strip { gap: 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <img src="fotos/logo.png" alt="The Little Tour">
+  <ul>
+    <li><a href="#tours">Tours</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="https://wa.me/50375580954" target="_blank" class="nav-wa">WhatsApp</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-img">
+    <img src="fotos/volcan-santa-1.jpg" alt="Volcán Santa Ana">
+  </div>
+  <div class="hero-content">
+    <p class="hero-label">El Salvador · Tours Privados</p>
+    <h1 class="hero-title">Pequeños grupos.<br>Grandes<br>experiencias.</h1>
+    <p class="hero-tagline">A great experience!</p>
+    <p class="hero-desc">Volcanes, cascadas, cultura maya y la Ruta de las Flores. Diseñamos cada recorrido con la atención al detalle de un proyecto creativo y la cercanía de un amigo que conoce los mejores rincones.</p>
+    <a href="#tours" class="hero-cta">Ver nuestros tours</a>
+  </div>
+</section>
+
+<div class="strip">
+  <span class="strip-item"><span class="strip-dot"></span>Tours 100% privados</span>
+  <span class="strip-item"><span class="strip-dot"></span>Guías certificados</span>
+  <span class="strip-item"><span class="strip-dot"></span>Recogida en tu hotel</span>
+  <span class="strip-item"><span class="strip-dot"></span>Horarios a tu medida</span>
+  <span class="strip-item"><span class="strip-dot"></span>Santa Ana, El Salvador</span>
+</div>
+
+<section id="tours">
+  <div class="sec-head">
+    <p class="sec-label">Nuestras experiencias</p>
+    <h2 class="sec-title">Cada tour, una historia diferente</h2>
+    <p class="sec-sub">Las mejores experiencias no se cuentan, se viven.</p>
+  </div>
+  <div class="tours-grid">
+
+    <div class="tour-card">
+      <div class="card-imgs">
+        <img class="pri" src="fotos/volcan-santa-1.jpg" alt="Volcán Santa Ana">
+        <img class="sec" src="fotos/volcan-santa-2.jpg" alt="Cráter Volcán Santa Ana">
+        <span class="card-tag">Naturaleza · Aventura</span>
+        
+      </div>
+      <div class="card-body">
+        <p class="card-cat">Cráter Sin Multitudes</p>
+        <h3 class="card-title">Volcán Santa Ana + Lago de Coatepeque</h3>
+        <p class="card-desc">Ascenso al volcán más alto de El Salvador (2,381 msnm) con vista al cráter azufrado. Tarde de relax en las aguas cristalinas del Lago de Coatepeque.</p>
+        <div class="card-meta">
+          <span class="meta-i">⏱ Día completo</span>
+          <span class="meta-i">🧭 Guía certificado</span>
+          <span class="meta-i">⛰ Dificultad moderada</span>
+        </div>
+        <a href="https://wa.me/50375580954?text=Hola! Me interesa el tour Volcán Santa Ana + Lago de Coatepeque" target="_blank" class="card-btn">Reservar por WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="tour-card">
+      <div class="card-imgs">
+        <img class="pri" src="fotos/izalco-1.jpg" alt="Volcán Izalco">
+        <img class="sec" src="fotos/izalco-2.jpg" alt="Cerro Verde">
+        <span class="card-tag">Naturaleza · Mirador</span>
+        
+      </div>
+      <div class="card-body">
+        <p class="card-cat">Cráter Sin Multitudes</p>
+        <h3 class="card-title">Volcán Izalco + Cerro Verde</h3>
+        <p class="card-desc">El Faro del Pacífico desde el mirador natural de Cerro Verde. Vistas únicas al volcán más joven de América Central en un entorno de bosque nuboso.</p>
+        <div class="card-meta">
+          <span class="meta-i">⏱ Medio día</span>
+          <span class="meta-i">🌿 Bosque nuboso</span>
+        </div>
+        <a href="https://wa.me/50375580954?text=Hola! Me interesa el tour Volcán Izalco + Cerro Verde" target="_blank" class="card-btn">Reservar por WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="tour-card">
+      <div class="card-imgs">
+        <img class="pri" src="fotos/tamanique-1.jpg" alt="Cascadas de Tamanique">
+        <img class="sec" src="fotos/tamanique-2.jpg" alt="Cascada Tamanique">
+        <span class="card-tag">Agua · Playa · Montaña</span>
+        
+      </div>
+      <div class="card-body">
+        <p class="card-cat">Agua, Roca y Mar</p>
+        <h3 class="card-title">Cascadas de Tamanique + El Tunco + Peñón de Comasagua</h3>
+        <p class="card-desc">Tres paisajes en un solo día: cascadas ocultas entre cañones de roca, la playa volcánica de El Tunco y el imponente peñón costero del Pacífico.</p>
+        <div class="card-meta">
+          <span class="meta-i">⏱ Día completo</span>
+          <span class="meta-i">💧 3 destinos</span>
+        </div>
+        <a href="https://wa.me/50375580954?text=Hola! Me interesa el tour Cascadas de Tamanique + El Tunco" target="_blank" class="card-btn">Reservar por WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="tour-card">
+      <div class="card-imgs">
+        <img class="pri" src="fotos/ruta-flores-1.jpg" alt="Ruta de las Flores">
+        <img class="sec" src="fotos/ruta-flores-2.jpg" alt="Pueblo Ruta de las Flores">
+        <span class="card-tag">Cultura · Historia</span>
+        
+      </div>
+      <div class="card-body">
+        <p class="card-cat">5 Pueblos, Origen y Tradición</p>
+        <h3 class="card-title">Ruta de las Flores</h3>
+        <p class="card-desc">Cinco pueblos coloniales del occidente salvadoreño: café de origen, artesanías, gastronomía local y arquitectura que cuenta siglos de historia viva.</p>
+        <div class="card-meta">
+          <span class="meta-i">⏱ Día completo</span>
+          <span class="meta-i">🌸 5 pueblos</span>
+        </div>
+        <a href="https://wa.me/50375580954?text=Hola! Me interesa el tour Ruta de las Flores" target="_blank" class="card-btn">Reservar por WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="tour-card">
+      <div class="card-imgs">
+        <img class="pri" src="fotos/copan-1.jpg" alt="Ruinas de Copán">
+        <img class="sec" src="fotos/copan-2.jpg" alt="Escultura Maya Copán">
+        <span class="card-tag">Internacional · UNESCO</span>
+        
+      </div>
+      <div class="card-body">
+        <p class="card-cat">La Ciudad Maya Más Escultural de América</p>
+        <h3 class="card-title">Copán, Honduras</h3>
+        <p class="card-desc">Patrimonio UNESCO desde 1980. Un día completo entre pirámides, estelas y la Escalera Jeroglífica más larga del mundo maya. Desde El Salvador, cruzando 3 países.</p>
+        <div class="card-meta">
+          <span class="meta-i">⏱ 14 horas</span>
+          <span class="meta-i">🌎 Honduras</span>
+          <span class="meta-i">🏛 Guía local</span>
+        </div>
+        <a href="https://wa.me/50375580954?text=Hola! Me interesa el tour Ruinas de Copán, Honduras" target="_blank" class="card-btn">Reservar por WhatsApp</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="nosotros" class="promise">
+  <div class="promise-img">
+    <img src="fotos/volcan-santa-2.jpg" alt="The Little Tour — experiencia">
+  </div>
+  <div>
+    <p class="promise-label">Nuestra promesa</p>
+    <h2 class="promise-title">No vendemos destinos.<br>Vendemos momentos<br>que quedan.</h2>
+    <p class="promise-quote">Las mejores experiencias no se cuentan, se viven.</p>
+    <ul class="promise-list">
+      <li>Grupos pequeños donde el detalle importa — el ritmo es tuyo, no del tour.</li>
+      <li>Guías certificados que conocen cada rincón como un amigo local.</li>
+      <li>Recogida en tu hotel y regreso al mismo punto, sin complicaciones.</li>
+      <li>Turismo de experiencia hecho a la medida del viajero curioso.</li>
+      <li>Aventura responsable que respeta el territorio y la cultura local.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <img src="fotos/logo.png" alt="The Little Tour">
+  <div class="footer-right">
+    El Salvador · Turismo Privado<br>
+    <a href="mailto:thelittletoursv@gmail.com">thelittletoursv@gmail.com</a> &nbsp;·&nbsp;
+    <a href="https://wa.me/50375580954" target="_blank">+503 7558 0954</a>
+  </div>
+</footer>
+
+<a href="https://wa.me/50375580954" target="_blank" class="wa-float" title="Escríbenos por WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+</body>
+</html>
