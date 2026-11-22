@@ -3,7 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Little Tour — El Salvador</title>
+<title>The Little Tour | El Salvador</title>
+<script>
+(function(){var d=document.documentElement;
+if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+d.classList.add('js-anim');
+try{if(!sessionStorage.getItem('tlt-intro')){d.classList.add('show-intro');sessionStorage.setItem('tlt-intro','1');}}catch(e){}
+})();
+</script>
 <style>
 @font-face{font-family:'Mosk';src:url('fonts/Mosk-900.ttf') format('truetype');font-weight:900}
 @font-face{font-family:'Mosk';src:url('fonts/Mosk-700.ttf') format('truetype');font-weight:700}
@@ -23,34 +30,43 @@
 :root {
   --teal: #53A69D;
   --teal-dark: #3D7D76;
+  --morado: #5F65D9;
   --negro: #202020;
   --gris: #F2F2F2;
+  --crema: #F4E5D8;
+  --ease: cubic-bezier(.2,.7,.2,1);
 }
 html { scroll-behavior: smooth; }
 body { font-family: 'Roboto', sans-serif; color: var(--negro); background: #fff; line-height: 1.6; }
 
-/* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: var(--negro);
+  background: var(--teal);
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 5vw; height: 64px;
 }
 nav img { height: 48px; width: auto; }
-nav ul { display: flex; gap: 2rem; list-style: none; }
+nav ul { display: flex; gap: 2rem; list-style: none; margin-left: auto; }
+.lang-switch { display: flex; margin-left: 1.6rem; border: 1px solid rgba(255,255,255,0.6); border-radius: 2px; }
+.lang-switch button {
+  background: none; border: none; color: #fff; cursor: pointer;
+  font-family: 'Mosk', sans-serif; font-weight: 500; font-size: 0.72rem; letter-spacing: 0.08em;
+  padding: 0.35rem 0.6rem; opacity: 0.75; transition: background .2s, opacity .2s;
+}
+.lang-switch button:hover { opacity: 1; }
+.lang-switch button.on { background: #fff; color: var(--teal-dark); opacity: 1; font-weight: 700; }
 nav ul a {
-  color: rgba(255,255,255,0.7); text-decoration: none;
+  color: #fff; text-decoration: none;
   font-family: 'Mosk', sans-serif; font-weight: 400;
   font-size: 0.8rem; letter-spacing: 0.05em; transition: color .2s;
 }
 nav ul a:hover { color: var(--teal); }
 .nav-wa {
-  background: var(--teal) !important; color: white !important;
+  background: var(--morado) !important; color: white !important;
   padding: 0.4rem 1.1rem; border-radius: 2px; font-weight: 700 !important;
 }
-.nav-wa:hover { background: var(--teal-dark) !important; }
+.nav-wa:hover { background: #4C51B8 !important; }
 
-/* HERO */
 .hero {
   margin-top: 64px; height: calc(100vh - 64px);
   min-height: 520px; display: grid;
@@ -63,28 +79,28 @@ nav ul a:hover { color: var(--teal); }
   background: linear-gradient(to right, rgba(0,0,0,0.15), transparent);
 }
 .hero-content {
-  background: var(--negro);
+  background: var(--crema);
   display: flex; flex-direction: column;
   justify-content: center; padding: 4vw 5vw;
 }
 .hero-label {
   font-family: 'Mosk', sans-serif; font-weight: 400;
-  font-size: 0.72rem; color: var(--teal);
+  font-size: 0.72rem; color: var(--teal-dark);
   letter-spacing: 0.14em; margin-bottom: 1.4rem;
 }
 .hero-title {
   font-family: 'Mosk', sans-serif; font-weight: 900;
   font-size: clamp(2rem, 3.2vw, 3rem);
-  color: white; line-height: 1.1; margin-bottom: 0.6rem;
+  color: var(--morado); line-height: 1.1; margin-bottom: 0.6rem;
 }
 .hero-tagline {
   font-family: 'Lora', serif; font-weight: 400; font-style: italic;
   font-size: clamp(1rem, 1.4vw, 1.2rem);
-  color: var(--teal); margin-bottom: 1.4rem;
+  color: var(--teal-dark); margin-bottom: 1.4rem;
 }
 .hero-desc {
   font-family: 'Roboto', sans-serif; font-weight: 300;
-  font-size: 0.9rem; color: rgba(255,255,255,0.6);
+  font-size: 0.9rem; color: #4a4a4a;
   line-height: 1.75; max-width: 36ch; margin-bottom: 2.2rem;
 }
 .hero-cta {
@@ -97,7 +113,6 @@ nav ul a:hover { color: var(--teal); }
 }
 .hero-cta:hover { background: var(--teal-dark); }
 
-/* STRIP */
 .strip {
   background: var(--teal);
   display: flex; align-items: center;
@@ -114,8 +129,8 @@ nav ul a:hover { color: var(--teal); }
   background: rgba(255,255,255,0.5); flex-shrink: 0;
 }
 
-/* SECTION HEAD */
 .sec-head { text-align: center; padding: 5rem 5vw 3rem; }
+#tours { background: var(--gris); padding-bottom: 1px; }
 .sec-label {
   font-family: 'Mosk', sans-serif; font-weight: 400;
   font-size: 0.7rem; color: var(--teal);
@@ -131,7 +146,6 @@ nav ul a:hover { color: var(--teal); }
   font-size: 1rem; color: #888; margin-top: 0.6rem;
 }
 
-/* TOURS GRID */
 .tours-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -157,14 +171,14 @@ nav ul a:hover { color: var(--teal); }
 .tour-card:hover .card-imgs img.sec { opacity: 1; }
 .card-tag {
   position: absolute; top: 1rem; left: 1rem;
-  background: var(--negro); color: white;
+  background: var(--teal); color: white;
   font-family: 'Mosk', sans-serif; font-weight: 500;
   font-size: 0.65rem; letter-spacing: 0.08em;
   padding: 0.28rem 0.65rem; z-index: 2;
 }
 .card-price {
   position: absolute; bottom: 1rem; right: 1rem;
-  background: var(--teal); color: white;
+  background: var(--morado); color: white;
   font-family: 'Mosk', sans-serif; font-weight: 900;
   font-size: 1.05rem; padding: 0.35rem 0.85rem;
   z-index: 2; line-height: 1;
@@ -189,23 +203,22 @@ nav ul a:hover { color: var(--teal); }
   font-size: 0.82rem; color: #666;
   line-height: 1.65; flex: 1; margin-bottom: 1.1rem;
 }
-.card-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+.card-meta { display: flex; gap: 0.35rem 1.4rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
 .meta-i {
   font-family: 'Roboto', sans-serif; font-size: 0.72rem; color: #999;
   display: flex; align-items: center; gap: 0.3rem;
 }
 .card-btn {
   display: block; text-align: center;
-  background: var(--negro); color: white; text-decoration: none;
+  background: var(--teal); color: white; text-decoration: none;
   font-family: 'Mosk', sans-serif; font-weight: 700;
   font-size: 0.75rem; letter-spacing: 0.07em;
   padding: 0.75rem; transition: background .2s;
 }
-.card-btn:hover { background: var(--teal); }
+.card-btn:hover { background: var(--morado); }
 
-/* PROMISE */
 .promise {
-  background: var(--negro); padding: 6rem 5vw;
+  background: var(--morado); padding: 6rem 5vw;
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 5rem; align-items: center;
 }
@@ -213,7 +226,7 @@ nav ul a:hover { color: var(--teal); }
 .promise-img img { width: 100%; height: 100%; object-fit: cover; }
 .promise-label {
   font-family: 'Mosk', sans-serif; font-weight: 400;
-  font-size: 0.7rem; color: var(--teal);
+  font-size: 0.7rem; color: var(--crema);
   letter-spacing: 0.16em; margin-bottom: 1.2rem;
 }
 .promise-title {
@@ -223,37 +236,135 @@ nav ul a:hover { color: var(--teal); }
 }
 .promise-quote {
   font-family: 'Lora', serif; font-style: italic;
-  font-size: 1.05rem; color: var(--teal);
+  font-size: 1.05rem; color: var(--crema);
   line-height: 1.6; margin-bottom: 2rem;
-  padding-left: 1.2rem; border-left: 2px solid var(--teal);
+  padding-left: 1.2rem; border-left: 2px solid var(--crema);
 }
 .promise-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
 .promise-list li {
   display: flex; gap: 0.9rem; align-items: flex-start;
   font-family: 'Roboto', sans-serif; font-weight: 300;
-  font-size: 0.88rem; color: rgba(255,255,255,0.65); line-height: 1.65;
+  font-size: 0.88rem; color: rgba(255,255,255,0.88); line-height: 1.65;
 }
 .promise-list li::before {
   content: ''; width: 18px; height: 18px; border-radius: 50%;
-  background: var(--teal); flex-shrink: 0; margin-top: 3px;
+  background: var(--crema); flex-shrink: 0; margin-top: 3px;
 }
 
-/* FOOTER */
+.reviews {
+  background: var(--crema); padding: 5rem 5vw;
+  text-align: center;
+}
+.reviews-label {
+  font-family: 'Mosk', sans-serif; font-weight: 400;
+  font-size: 0.7rem; color: var(--teal-dark);
+  letter-spacing: 0.16em; margin-bottom: 1.2rem;
+}
+.reviews-title {
+  font-family: 'Mosk', sans-serif; font-weight: 900;
+  font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+  color: var(--morado); line-height: 1.15; margin-bottom: 0.8rem;
+}
+.reviews-quote {
+  font-family: 'Lora', serif; font-style: italic;
+  font-size: 1.05rem; color: var(--negro);
+  line-height: 1.6; margin: 0 auto 2.5rem; max-width: 520px;
+}
+.reviews-widget {
+  display: inline-block; background: white;
+  padding: 1.5rem 2rem; border-radius: 2px;
+  border-top: 3px solid var(--teal);
+}
+.reviews-widget ul { list-style: none; }
+.reviews-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem; max-width: 1150px; margin: 2.5rem auto 1rem; text-align: left;
+}
+.review-card {
+  background: white; padding: 1.6rem 1.6rem 1.4rem;
+  border-radius: 2px; border-top: 3px solid var(--teal);
+  display: flex; flex-direction: column;
+}
+.review-stars { color: var(--teal); font-size: 1rem; letter-spacing: 0.15em; margin-bottom: 0.6rem; }
+.review-title {
+  font-family: 'Lora', serif; font-style: italic; font-weight: 600;
+  font-size: 1.02rem; color: var(--negro); line-height: 1.35; margin-bottom: 0.6rem;
+}
+.review-text {
+  font-family: 'Roboto', sans-serif; font-weight: 300;
+  font-size: 0.88rem; color: var(--negro); line-height: 1.65; flex: 1;
+}
+.review-author {
+  font-family: 'Mosk', sans-serif; font-weight: 700;
+  font-size: 0.72rem; letter-spacing: 0.08em; color: var(--teal-dark);
+  margin-top: 1.1rem;
+}
+.review-author span { font-family: 'Roboto', sans-serif; font-weight: 400; letter-spacing: 0; color: #666; }
+.review-tag { font-family: 'Roboto', sans-serif; font-size: 0.7rem; color: #777; margin-top: 0.2rem; }
+.reviews-source {
+  font-family: 'Roboto', sans-serif; font-size: 0.78rem; color: #555; margin-bottom: 3rem;
+}
+.reviews-source a { color: var(--teal-dark); font-weight: 500; }
+.reviews-google { margin-top: 1.5rem; }
+.google-btn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  background: var(--teal-dark); color: white; text-decoration: none;
+  font-family: 'Mosk', sans-serif; font-weight: 700;
+  font-size: 0.78rem; letter-spacing: 0.07em;
+  padding: 0.85rem 1.6rem; border-radius: 2px; transition: background .2s;
+}
+.google-btn:hover { background: var(--morado); }
+.google-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+.base { background: #fff; padding: 0 5vw 6rem; }
+.base-grid {
+  display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem;
+  max-width: 1150px; margin: 0 auto; align-items: center;
+}
+.base-map {
+  position: relative; height: 380px; overflow: hidden;
+  border-radius: 2px; border-top: 3px solid var(--teal); background: var(--gris);
+}
+.base-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.base-place {
+  font-family: 'Mosk', sans-serif; font-weight: 700;
+  font-size: 1.2rem; color: var(--morado); margin-bottom: 0.4rem;
+}
+.base-text {
+  font-family: 'Roboto', sans-serif; font-weight: 300;
+  font-size: 0.92rem; color: #4a4a4a; line-height: 1.7; margin-bottom: 1.8rem;
+}
+.base-links { display: flex; flex-wrap: wrap; gap: 1.4rem; }
+.icon-link {
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  text-decoration: none; width: 76px;
+}
+.icon-circle {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--teal); display: flex; align-items: center; justify-content: center;
+  transition: background .25s, transform .25s var(--ease);
+}
+.icon-circle svg { width: 24px; height: 24px; }
+.icon-link:hover .icon-circle { background: var(--morado); transform: translateY(-3px); }
+.icon-cap {
+  font-family: 'Mosk', sans-serif; font-weight: 500;
+  font-size: 0.68rem; letter-spacing: 0.06em; color: var(--teal-dark); text-align: center;
+}
+
 footer {
-  background: var(--negro); padding: 2.5rem 5vw;
+  background: var(--teal); padding: 2.5rem max(5vw, 96px) 2.5rem 5vw;
   display: flex; align-items: center;
   justify-content: space-between;
   flex-wrap: wrap; gap: 1.5rem;
-  border-top: 3px solid var(--teal);
+  border-top: 3px solid var(--morado);
 }
 footer img { height: 50px; width: auto; }
 .footer-right {
   text-align: right; font-family: 'Roboto', sans-serif;
-  font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.8;
+  font-size: 0.82rem; color: rgba(255,255,255,0.9); line-height: 1.8;
 }
-.footer-right a { color: var(--teal); text-decoration: none; font-weight: 500; }
+.footer-right a { color: #fff; text-decoration: none; font-weight: 500; }
 
-/* WA FLOAT */
 .wa-float {
   position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
   background: #25D366; border-radius: 50%;
@@ -264,7 +375,6 @@ footer img { height: 50px; width: auto; }
 }
 .wa-float:hover { transform: scale(1.08); }
 
-/* GALLERY COUNT BADGE */
 .gallery-count {
   position: absolute; bottom: 1rem; left: 1rem;
   background: rgba(0,0,0,0.55);
@@ -277,20 +387,23 @@ footer img { height: 50px; width: auto; }
   backdrop-filter: blur(4px);
 }
 
-/* LIGHTBOX */
 .lightbox {
-  display: none;
+  display: flex; opacity: 0; visibility: hidden;
+  transition: opacity .35s var(--ease), visibility 0s linear .35s;
   position: fixed; inset: 0; z-index: 1000;
   background: rgba(0,0,0,0.92);
   align-items: center; justify-content: center;
   flex-direction: column;
 }
-.lightbox.active { display: flex; }
+.lightbox.active { opacity: 1; visibility: visible; transition: opacity .35s var(--ease), visibility 0s; }
 .lightbox-img {
-  max-width: 90vw; max-height: 80vh;
+  max-width: 90vw; max-height: 70vh;
   object-fit: contain;
   border-radius: 2px;
+  transition: opacity .4s var(--ease), transform .5s var(--ease);
 }
+.lightbox:not(.active) .lightbox-img { transform: scale(.96); }
+.lightbox-img.swap { opacity: 0; }
 .lightbox-controls {
   display: flex; align-items: center; gap: 2rem;
   margin-top: 1.2rem;
@@ -327,28 +440,139 @@ footer img { height: 50px; width: auto; }
 .lightbox-thumbs img.active,
 .lightbox-thumbs img:hover { opacity: 1; border-color: var(--teal); }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
+  .base-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .base-map { height: 300px; }
+  .base-links { justify-content: space-between; gap: 0.8rem; }
   .hero { grid-template-columns: 1fr; height: auto; }
   .hero-img { height: 52vw; min-height: 240px; }
   .hero-content { padding: 2.5rem 6vw 3rem; }
   nav ul { display: none; }
+  .lang-switch { margin-left: auto; }
   .promise { grid-template-columns: 1fr; gap: 2.5rem; }
   .promise-img { height: 240px; }
   .tours-grid { grid-template-columns: 1fr; margin: 0 3vw 4rem; }
   .strip { gap: 1.2rem; }
 }
+
+.intro { display: none; }
+.show-intro .intro {
+  display: flex; position: fixed; inset: 0; z-index: 2000;
+  background: var(--teal); align-items: center; justify-content: center;
+  cursor: pointer; animation: introOut .5s var(--ease) 1s forwards;
+}
+.show-intro .intro img {
+  width: min(240px, 55vw); height: auto;
+  opacity: 0; transform: scale(.94);
+  animation: introLogo .9s var(--ease) .1s forwards;
+}
+.show-intro .intro.skip { animation: introOut .25s ease forwards; }
+@keyframes introLogo { to { opacity: 1; transform: none; } }
+@keyframes introOut { to { opacity: 0; visibility: hidden; } }
+
+:root { --hd: 0s; }
+.show-intro { --hd: 1.05s; }
+.js-anim .hero-img { background: #000; }
+.js-anim .hero-img img {
+  transform: translate3d(0, var(--hy, 0px), 0);
+  opacity: var(--ho, 1); will-change: transform;
+  animation: heroZoom 2.6s var(--ease) var(--hd) both;
+}
+.js-anim .hero-content > * {
+  opacity: 0;
+  animation: heroIn 1s var(--ease) forwards;
+  animation-delay: calc(var(--hd) + .25s + var(--i, 0) * .12s);
+}
+.js-anim .hero-content > :nth-child(2) { --i: 1; }
+.js-anim .hero-content > :nth-child(3) { --i: 2; }
+.js-anim .hero-content > :nth-child(4) { --i: 3; }
+.js-anim .hero-content > :nth-child(5) { --i: 4; }
+@keyframes heroZoom { from { scale: 1.08; } to { scale: 1; } }
+@keyframes heroIn { from { opacity: 0; translate: 0 18px; } to { opacity: 1; translate: 0 0; } }
+
+.js-anim :is(.strip-item, .sec-head > *, .tour-card > *, .promise-img, .promise-label,
+  .promise-title, .promise-quote, .promise-list li, .reviews-label, .reviews-title,
+  .review-card, .reviews-source, .reviews-quote, .reviews-widget, .reviews-google, .base-map, .base-info) {
+  opacity: 0; translate: 0 28px;
+  transition: opacity .9s var(--ease) var(--d, 0s), translate .9s var(--ease) var(--d, 0s);
+}
+.js-anim :is(.sec-title, .promise-title, .reviews-title) {
+  filter: blur(6px);
+  transition: opacity 1s var(--ease) var(--d, 0s), translate 1s var(--ease) var(--d, 0s), filter 1s var(--ease) var(--d, 0s);
+}
+.js-anim .in { opacity: 1 !important; translate: 0 0 !important; filter: none !important; }
+
+.js-anim .promise-img img {
+  transform: translate3d(0, var(--py, 0px), 0) scale(1.12);
+  will-change: transform;
+}
+
+@media (hover: hover) {
+  .card-imgs img { transition: opacity .5s, transform 1.2s var(--ease); }
+  .tour-card:hover .card-imgs img { transform: scale(1.05); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wa-float::before {
+    content: ''; position: absolute; inset: 0; border-radius: 50%;
+    background: #25D366; z-index: -1;
+    animation: waPulse 4.5s var(--ease) 3s infinite;
+  }
+}
+@keyframes waPulse {
+  0% { transform: scale(1); opacity: .45; }
+  45%, 100% { transform: scale(1.6); opacity: 0; }
+}
+
+.lightbox-auto { display: flex; align-items: center; gap: .8rem; margin-top: .8rem; }
+.lightbox-progress {
+  width: min(220px, 55vw); height: 2px; border-radius: 2px;
+  background: rgba(255,255,255,.15); overflow: hidden;
+}
+.lightbox-progress span {
+  display: block; height: 100%; background: var(--teal);
+  transform-origin: left; transform: scaleX(0);
+}
+.lightbox-progress span.run { animation: lbProg 4.5s linear forwards; }
+.lightbox.paused .lightbox-progress span,
+.lightbox.hovering .lightbox-progress span { animation-play-state: paused; }
+@keyframes lbProg { to { transform: scaleX(1); } }
+.js-anim .lightbox-img.kb { animation: lbKb 5.2s linear forwards; cursor: pointer; }
+.lightbox.paused .lightbox-img.kb,
+.lightbox.hovering .lightbox-img.kb { animation-play-state: paused; }
+@keyframes lbKb { from { scale: 1; } to { scale: 1.06; } }
+.lightbox-play {
+  background: none; border: none; color: white; cursor: pointer;
+  font-size: .8rem; opacity: .6; padding: .3rem .5rem; transition: opacity .2s;
+}
+.lightbox-play:hover { opacity: 1; }
+html:not(.js-anim) .lightbox-auto { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important; transition-delay: 0s !important;
+  }
+}
 </style>
 </head>
 <body>
+
+<div class="intro" id="intro" aria-hidden="true"><img src="fotos/logo-original.svg" alt=""></div>
 
 <nav>
   <a href="#"><img src="fotos/logo.png" alt="The Little Tour"></a>
   <ul>
     <li><a href="#tours">Tours</a></li>
     <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#opiniones">Opiniones</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
     <li><a href="https://wa.me/50375580954" target="_blank" class="nav-wa">WhatsApp</a></li>
   </ul>
+  <div class="lang-switch" role="group" aria-label="Idioma / Language">
+    <button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button>
+  </div>
 </nav>
 
 <section class="hero">
@@ -356,7 +580,7 @@ footer img { height: 50px; width: auto; }
     <img src="fotos/volcan-santa-2.jpg" alt="Volcán Santa Ana">
   </div>
   <div class="hero-content">
-    <p class="hero-label">El Salvador · Tours Privados</p>
+    <p class="hero-label">El Salvador · Turismo Privado y Grupos Reducidos</p>
     <h1 class="hero-title">Pequeños grupos.<br>Grandes<br>experiencias.</h1>
     <p class="hero-tagline">A great experience!</p>
     <p class="hero-desc">Volcanes, cascadas, cultura maya y la Ruta de las Flores. Diseñamos cada recorrido con la atención al detalle de un proyecto creativo y la cercanía de un amigo que conoce los mejores rincones.</p>
@@ -385,16 +609,16 @@ footer img { height: 50px; width: auto; }
         <img class="pri" src="fotos/volcan-santa-2.jpg" alt="Volcán Santa Ana">
         <img class="sec" src="fotos/volcan-santa-3.jpg" alt="Cráter Volcán Santa Ana">
         <span class="card-tag">Naturaleza · Aventura</span>
-        <span class="gallery-count">📷 6 fotos</span>
+        <span class="gallery-count">6 fotos</span>
       </div>
       <div class="card-body">
         <p class="card-cat">Cráter Sin Multitudes</p>
         <h3 class="card-title">Volcán Santa Ana + Lago de Coatepeque</h3>
         <p class="card-desc">Ascenso al volcán más alto de El Salvador (2,381 msnm) con vista al cráter azufrado. Tarde de relax en las aguas cristalinas del Lago de Coatepeque.</p>
         <div class="card-meta">
-          <span class="meta-i">⏱ Día completo</span>
-          <span class="meta-i">🧭 Guía certificado</span>
-          <span class="meta-i">⛰ Dificultad moderada</span>
+          <span class="meta-i">Día completo</span>
+          <span class="meta-i">Guía certificado</span>
+          <span class="meta-i">Dificultad moderada</span>
         </div>
         <a href="https://wa.me/50375580954?text=Hola! Me interesa el tour Volcán Santa Ana + Lago de Coatepeque" target="_blank" class="card-btn">Reservar por WhatsApp</a>
       </div>
@@ -402,18 +626,18 @@ footer img { height: 50px; width: auto; }
 
     <div class="tour-card">
       <div class="card-imgs" onclick="openGallery('izalco')" style="cursor:pointer">
-        <img class="pri" src="fotos/izalco-2.jpg" alt="Volcán Izalco — cima">
-        <img class="sec" src="fotos/izalco-3.jpg" alt="Volcán Izalco — vista">
+        <img class="pri" src="fotos/izalco-2.jpg" alt="Volcán Izalco, cima">
+        <img class="sec" src="fotos/izalco-3.jpg" alt="Volcán Izalco, vista">
         <span class="card-tag">Naturaleza · Mirador</span>
-        <span class="gallery-count">📷 7 fotos</span>
+        <span class="gallery-count">7 fotos</span>
       </div>
       <div class="card-body">
         <p class="card-cat">Cráter Sin Multitudes</p>
         <h3 class="card-title">Volcán Izalco + Cerro Verde</h3>
         <p class="card-desc">El Faro del Pacífico desde el mirador natural de Cerro Verde. Vistas únicas al volcán más joven de América Central en un entorno de bosque nuboso.</p>
         <div class="card-meta">
-          <span class="meta-i">⏱ Medio día</span>
-          <span class="meta-i">🌿 Bosque nuboso</span>
+          <span class="meta-i">Medio día</span>
+          <span class="meta-i">Bosque nuboso</span>
         </div>
         <a href="https://wa.me/50375580954?text=Hola! Me interesa el tour Volcán Izalco + Cerro Verde" target="_blank" class="card-btn">Reservar por WhatsApp</a>
       </div>
@@ -424,15 +648,15 @@ footer img { height: 50px; width: auto; }
         <img class="pri" src="fotos/tamanique-1.jpg" alt="Cascadas de Tamanique">
         <img class="sec" src="fotos/tamanique-6.jpg" alt="Cascada Tamanique cañón">
         <span class="card-tag">Agua · Playa · Montaña</span>
-        <span class="gallery-count">📷 7 fotos</span>
+        <span class="gallery-count">7 fotos</span>
       </div>
       <div class="card-body">
         <p class="card-cat">Agua, Roca y Mar</p>
         <h3 class="card-title">Cascadas de Tamanique + El Tunco + Peñón de Comasagua</h3>
         <p class="card-desc">Tres paisajes en un solo día: cascadas ocultas entre cañones de roca, la playa volcánica de El Tunco y el imponente peñón costero del Pacífico.</p>
         <div class="card-meta">
-          <span class="meta-i">⏱ Día completo</span>
-          <span class="meta-i">💧 3 destinos</span>
+          <span class="meta-i">Día completo</span>
+          <span class="meta-i">3 destinos</span>
         </div>
         <a href="https://wa.me/50375580954?text=Hola! Me interesa el tour Cascadas de Tamanique + El Tunco" target="_blank" class="card-btn">Reservar por WhatsApp</a>
       </div>
@@ -443,15 +667,15 @@ footer img { height: 50px; width: auto; }
         <img class="pri" src="fotos/ruta-flores-1.jpg" alt="Ruta de las Flores">
         <img class="sec" src="fotos/ruta-flores-2.jpg" alt="Pueblo Ruta de las Flores">
         <span class="card-tag">Cultura · Historia</span>
-        <span class="gallery-count">📷 7 fotos</span>
+        <span class="gallery-count">7 fotos</span>
       </div>
       <div class="card-body">
         <p class="card-cat">5 Pueblos, Origen y Tradición</p>
         <h3 class="card-title">Ruta de las Flores</h3>
         <p class="card-desc">Cinco pueblos coloniales del occidente salvadoreño: café de origen, artesanías, gastronomía local y arquitectura que cuenta siglos de historia viva.</p>
         <div class="card-meta">
-          <span class="meta-i">⏱ Día completo</span>
-          <span class="meta-i">🌸 5 pueblos</span>
+          <span class="meta-i">Día completo</span>
+          <span class="meta-i">5 pueblos</span>
         </div>
         <a href="https://wa.me/50375580954?text=Hola! Me interesa el tour Ruta de las Flores" target="_blank" class="card-btn">Reservar por WhatsApp</a>
       </div>
@@ -462,16 +686,16 @@ footer img { height: 50px; width: auto; }
         <img class="pri" src="fotos/copan-1.jpg" alt="Ruinas de Copán">
         <img class="sec" src="fotos/copan-2.jpg" alt="Escultura Maya Copán">
         <span class="card-tag">Internacional · UNESCO</span>
-        <span class="gallery-count">📷 10 fotos</span>
+        <span class="gallery-count">10 fotos</span>
       </div>
       <div class="card-body">
         <p class="card-cat">La Ciudad Maya Más Escultural de América</p>
         <h3 class="card-title">Copán, Honduras</h3>
         <p class="card-desc">Patrimonio UNESCO desde 1980. Un día completo entre pirámides, estelas y la Escalera Jeroglífica más larga del mundo maya. Desde El Salvador, cruzando 3 países.</p>
         <div class="card-meta">
-          <span class="meta-i">⏱ 14 horas</span>
-          <span class="meta-i">🌎 Honduras</span>
-          <span class="meta-i">🏛 Guía local</span>
+          <span class="meta-i">14 horas</span>
+          <span class="meta-i">Honduras</span>
+          <span class="meta-i">Guía local</span>
         </div>
         <a href="https://wa.me/50375580954?text=Hola! Me interesa el tour Ruinas de Copán, Honduras" target="_blank" class="card-btn">Reservar por WhatsApp</a>
       </div>
@@ -482,14 +706,14 @@ footer img { height: 50px; width: auto; }
 
 <section id="nosotros" class="promise">
   <div class="promise-img">
-    <img src="fotos/volcan-santa-2.jpg" alt="The Little Tour — experiencia">
+    <img src="fotos/volcan-santa-2.jpg" alt="The Little Tour, experiencia">
   </div>
   <div>
     <p class="promise-label">Nuestra promesa</p>
-    <h2 class="promise-title">No vendemos destinos.<br>Vendemos momentos<br>que quedan.</h2>
+    <h2 class="promise-title">Grupos reducidos,<br>diseñados a la medida.</h2>
     <p class="promise-quote">Las mejores experiencias no se cuentan, se viven.</p>
     <ul class="promise-list">
-      <li>Grupos pequeños donde el detalle importa — el ritmo es tuyo, no del tour.</li>
+      <li>Grupos pequeños donde el detalle importa. El ritmo es tuyo, no del tour.</li>
       <li>Guías certificados que conocen cada rincón como un amigo local.</li>
       <li>Recogida en tu hotel y regreso al mismo punto, sin complicaciones.</li>
       <li>Turismo de experiencia hecho a la medida del viajero curioso.</li>
@@ -498,12 +722,124 @@ footer img { height: 50px; width: auto; }
   </div>
 </section>
 
+<section id="opiniones" class="reviews">
+  <p class="reviews-label">Opiniones</p>
+  <h2 class="reviews-title">Lo que dicen nuestros viajeros</h2>
+  <div class="reviews-grid">
+    <article class="review-card">
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <h3 class="review-title">Amazing experience on the volcano</h3>
+      <p class="review-text">“We loved this experience. Javier is a fantastic guide. He stayed with us the whole way, making us feel safe that we wouldn't get lost and explaining everything we needed to know about the volcano. He's also a super friendly guy, so our hike was really entertaining and fun!”</p>
+      <p class="review-author">Clara_C <span>· Jan 2026</span></p>
+      <p class="review-tag">Traducida</p>
+    </article>
+    <article class="review-card">
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <h3 class="review-title">Amazing private tour with Alonso &amp; Carlos!</h3>
+      <p class="review-text">“My best friend and I had an incredible time hiking Santa Ana Volcano. Since it was a private tour, it was just us with them, which made the experience much more personal and allowed us to go at our own pace. They provided hiking sticks, were super attentive, and we finished the hike in just under 3 hours. They also took some amazing pictures of us along the way! […] Definitely one of the highlights of our trip to El Salvador. Alonso &amp; Carlos are 100% recommended!”</p>
+      <p class="review-author">Kevin_R <span>· Sep 2026</span></p>
+    </article>
+    <article class="review-card">
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <h3 class="review-title">Perfect Day</h3>
+      <p class="review-text">“Carlos and Alonzo were the perfect duo to guide us on this trip. Everything from the drive to the hike to the conversation was perfect. They both did such an incredible job from start to finish and I could not recommend them enough. They even provided us with pictures that were out of this world.”</p>
+      <p class="review-author">Daniel_G <span>· May 2026</span></p>
+    </article>
+    <article class="review-card">
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <h3 class="review-title">Santa Ana Volcano hike</h3>
+      <p class="review-text">“Santa Ana Volcano hike was an amazing experience. Our guide Carlos treated us like friends, which made the whole trip feel really comfortable and fun. I also loved hearing the history and stories about the volcano and El Salvador during the hike. The views at the top were incredible, and the overall atmosphere was unforgettable. Highly recommend this tour if you visit El Salvador!”</p>
+      <p class="review-author">Myeongnam_K <span>· May 2026</span></p>
+    </article>
+    <article class="review-card">
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <h3 class="review-title">An Authentic and Insightful El Salvador Experience</h3>
+      <p class="review-text">“Although the Santa Ana Volcano hike was unfortunately closed by the government due to weather conditions, I still had a wonderful and memorable experience with Little Tour and guide, Carlos. Carlos did an excellent job adapting the itinerary and making the most of the day. […] Their professionalism, flexibility, and genuine passion for sharing El Salvador made this a truly enjoyable experience.”</p>
+      <p class="review-author">Nishi_N <span>· Jun 2026</span></p>
+    </article>
+    <article class="review-card">
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <h3 class="review-title">Great hike</h3>
+      <p class="review-text">“Alonzo and Carlos were incredible guides! They were punctual, kind, knowledgeable, and went at our pace. Alonzo also took some amazing photos of us during the hike. I would recommend it!”</p>
+      <p class="review-author">Christina_S <span>· Apr 2026</span></p>
+      <p class="review-tag">Traducida</p>
+    </article>
+    <article class="review-card">
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <h3 class="review-title">Private, flexible, personalized hike of Santa Ana Volcano</h3>
+      <p class="review-text">“As older, moderately active people, we wanted a private tour to guide us up and down Santa Ana volcano because we wanted to go our pace. […] Carlos, our guide, also had two sets of trekking poles. […] We were appreciative of the pace, with lots of short breaks. […] Highly recommend the laid back approach to this tour company but very proactive with communication and responsiveness.”</p>
+      <p class="review-author">Aki_K <span>· Oct 2026</span></p>
+    </article>
+    <article class="review-card">
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <p class="review-text">“Carlos was such a wonderful guide, and I really appreciated how he accommodated my pace throughout the experience. He was so kind and patient, and his brother, who was our driver, was just as friendly! They both made me feel so comfortable, and my experience with them was truly one of the highlights of my trip. I couldn't recommend them enough!”</p>
+      <p class="review-author">kimberly_h <span>· Oct 2026</span></p>
+    </article>
+    <article class="review-card">
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <h3 class="review-title">Most incredible volcano views</h3>
+      <p class="review-text">“Unbelievable views and hike. About 2.5 hours up, 1.5 hours down if travelling in a group with kids. Recommend private so you can take your time. Moderate to hard difficulty but our guides Alonzo and Jorge were excellent. Highly recommended.”</p>
+      <p class="review-author">Malek_S <span>· Aug 2026</span></p>
+    </article>
+    <article class="review-card">
+      <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <h3 class="review-title">Great hike</h3>
+      <p class="review-text">“The moderate difficulty rating was right for this volcano. My guide Carlos was excellent and there were no problems. They picked me up at my hotel on time, answered every single question I had in depth, and gave me the whole history of the surrounding volcanoes.”</p>
+      <p class="review-author">Mark_F <span>· Apr 2026</span></p>
+      <p class="review-tag">Traducida</p>
+    </article>
+  </div>
+  <p class="reviews-source">Reseñas de <a href="https://www.viator.com/" target="_blank" rel="noopener">Viator</a></p>
+
+  <p class="reviews-quote">¿Ya viviste la aventura con nosotros? Cuéntale al mundo cómo fue.</p>
+  <div class="reviews-widget">
+    <div id="TA_cdswritereviewlgvi437" class="TA_cdswritereviewlgvi">
+    <ul id="rrDUmISh" class="TA_links LlKZ1F2b">
+    <li id="7v26n1d6VhOH" class="Dl15k6">
+    <a target="_blank" href="https://www.tripadvisor.com/"><img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="TripAdvisor"/></a>
+    </li>
+    </ul>
+    </div>
+    <script async src="https://www.jscache.com/wejs?wtype=cdswritereviewlgvi&amp;uniq=437&amp;locationId=33061853&amp;lang=en_US&amp;lang=en_US&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>
+  </div>
+  <p class="reviews-google">
+    <a class="google-btn" href="https://g.page/r/CcpCCeTiuvjZEBM/review" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M21.35 11.1H12v2.98h5.35c-.23 1.4-1.66 4.1-5.35 4.1-3.22 0-5.85-2.67-5.85-5.96S8.78 6.26 12 6.26c1.83 0 3.06.78 3.76 1.45l2.56-2.47C16.68 3.7 14.56 2.75 12 2.75 6.9 2.75 2.75 6.9 2.75 12S6.9 21.25 12 21.25c5.34 0 8.88-3.75 8.88-9.04 0-.61-.07-1.07-.15-1.53z"/></svg>
+      Déjanos tu reseña en Google
+    </a>
+  </p>
+</section>
+
+<section id="ubicacion" class="base">
+  <div class="sec-head">
+    <p class="sec-label">Nuestra base</p>
+    <h2 class="sec-title">Encuéntranos en Santa Ana</h2>
+  </div>
+  <div class="base-grid">
+    <div class="base-map">
+      <iframe src="https://maps.google.com/maps?q=13.8356305,-89.6229967&amp;z=13&amp;output=embed" title="Mapa de la base de The Little Tour en Santa Ana" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="base-info">
+      <p class="base-place">Santa Ana, El Salvador</p>
+      <p class="base-text">Desde aquí salimos a cada tour. Te recogemos en tu hotel y te regresamos al mismo punto.</p>
+      <div class="base-links">
+        <a class="icon-link" href="https://maps.app.goo.gl/TcFrLjwCZwMQwmzk6" target="_blank" rel="noopener" aria-label="Cómo llegar"><span class="icon-circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M19.527 4.799c1.212 2.608.937 5.678-.405 8.173-1.101 2.047-2.744 3.74-4.098 5.614-.619.858-1.244 1.75-1.669 2.727-.141.325-.263.658-.383.992-.121.333-.224.673-.34 1.008-.109.314-.236.684-.627.687h-.007c-.466-.001-.579-.53-.695-.887-.284-.874-.581-1.713-1.019-2.525-.51-.944-1.145-1.817-1.79-2.671L19.527 4.799zM8.545 7.705l-3.959 4.707c.724 1.54 1.821 2.863 2.871 4.18.247.31.494.622.737.936l4.984-5.925-.029.01c-1.741.601-3.691-.291-4.392-1.987a3.377 3.377 0 0 1-.209-.716c-.063-.437-.077-.761-.004-1.198l.001-.007zM5.492 3.149l-.003.004c-1.947 2.466-2.281 5.88-1.117 8.77l4.785-5.689-.058-.05-3.607-3.035zM14.661.436l-3.838 4.563a.295.295 0 0 1 .027-.01c1.6-.551 3.403.15 4.22 1.626.176.319.323.683.377 1.045.068.446.085.773.012 1.22l-.003.016 3.836-4.561A8.382 8.382 0 0 0 14.67.439l-.009-.003zM9.466 5.868L14.162.285l-.047-.012A8.31 8.31 0 0 0 11.986 0a8.439 8.439 0 0 0-6.169 2.766l-.016.018 3.665 3.084z"/></svg></span><span class="icon-cap">Cómo llegar</span></a>
+        <a class="icon-link" href="https://www.instagram.com/thelittletour/" target="_blank" rel="noopener" aria-label="Síguenos en Instagram"><span class="icon-circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></span><span class="icon-cap">Instagram</span></a>
+        <a class="icon-link" href="https://www.tripadvisor.com.mx/Attraction_Review-g294476-d33027816-Reviews-The_Little_Tour-San_Salvador_San_Salvador_Department.html" target="_blank" rel="noopener" aria-label="Míranos en Tripadvisor"><span class="icon-circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12.006 4.295c-2.67 0-5.338.784-7.645 2.353H0l1.963 2.135a5.997 5.997 0 0 0 4.04 10.43 5.976 5.976 0 0 0 4.075-1.6L12 19.705l1.922-2.09a5.972 5.972 0 0 0 4.072 1.598 6 6 0 0 0 6-5.998 5.982 5.982 0 0 0-1.957-4.432L24 6.648h-4.35a13.573 13.573 0 0 0-7.644-2.353zM12 6.255c1.531 0 3.063.303 4.504.903C13.943 8.138 12 10.43 12 13.1c0-2.671-1.942-4.962-4.504-5.942A11.72 11.72 0 0 1 12 6.256zM6.002 9.157a4.059 4.059 0 1 1 0 8.118 4.059 4.059 0 0 1 0-8.118zm11.992.002a4.057 4.057 0 1 1 .003 8.115 4.057 4.057 0 0 1-.003-8.115zm-11.992 1.93a2.128 2.128 0 0 0 0 4.256 2.128 2.128 0 0 0 0-4.256zm11.992 0a2.128 2.128 0 0 0 0 4.256 2.128 2.128 0 0 0 0-4.256z"/></svg></span><span class="icon-cap">Tripadvisor</span></a>
+        <a class="icon-link" href="https://www.viator.com/es-ES/tours/Santa-Ana/Tour-of-the-Majestic-Llamatepec-and-Lake-Coatepeque/d25291-5567626P3" target="_blank" rel="noopener" aria-label="Reserva en Viator"><span class="icon-circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3 4h4.6L12 15.2 16.4 4H21l-6.9 16h-4.2z"/></svg></span><span class="icon-cap">Viator</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <img src="fotos/logo.png" alt="The Little Tour">
   <div class="footer-right">
-    El Salvador · Turismo Privado<br>
+    El Salvador · Turismo Privado y Grupos Reducidos<br>
     <a href="mailto:thelittletoursv@gmail.com">thelittletoursv@gmail.com</a> &nbsp;·&nbsp;
-    <a href="https://wa.me/50375580954" target="_blank">+503 7558 0954</a>
+    <a href="https://wa.me/50375580954" target="_blank">+503 7558 0954</a><br>
+    <a href="https://www.instagram.com/thelittletour/" target="_blank" rel="noopener">Instagram</a> &nbsp;·&nbsp;
+    <a href="https://www.tripadvisor.com.mx/Attraction_Review-g294476-d33027816-Reviews-The_Little_Tour-San_Salvador_San_Salvador_Department.html" target="_blank" rel="noopener">Tripadvisor</a>
   </div>
 </footer>
 
@@ -513,7 +849,6 @@ footer img { height: 50px; width: auto; }
   </svg>
 </a>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
   <button class="lightbox-close" onclick="closeLightbox()">✕</button>
   <img class="lightbox-img" id="lightbox-img" src="" alt="">
@@ -521,6 +856,10 @@ footer img { height: 50px; width: auto; }
     <button class="lightbox-btn" onclick="prevPhoto()">&#8592;</button>
     <span class="lightbox-counter" id="lightbox-counter">1 / 6</span>
     <button class="lightbox-btn" onclick="nextPhoto()">&#8594;</button>
+  </div>
+  <div class="lightbox-auto">
+    <div class="lightbox-progress" id="lightbox-progress"><span></span></div>
+    <button class="lightbox-play" id="lightbox-play" onclick="togglePlay(event)" aria-label="Pausar presentación">❚❚</button>
   </div>
   <div class="lightbox-thumbs" id="lightbox-thumbs"></div>
 </div>
@@ -581,8 +920,10 @@ let currentIndex = 0;
 function openGallery(name) {
   currentGallery = galleries[name];
   currentIndex = 0;
+  const lb = document.getElementById('lightbox');
+  if (lb.classList.contains('paused')) togglePlay();
   showPhoto();
-  document.getElementById('lightbox').classList.add('active');
+  lb.classList.add('active');
   document.body.style.overflow = 'hidden';
 
   const thumbs = document.getElementById('lightbox-thumbs');
@@ -597,18 +938,68 @@ function openGallery(name) {
 }
 
 function showPhoto() {
-  document.getElementById('lightbox-img').src = currentGallery[currentIndex];
+  const img = document.getElementById('lightbox-img');
+  const src = currentGallery[currentIndex];
+  const isOpen = document.getElementById('lightbox').classList.contains('active');
+  if (isOpen && document.documentElement.classList.contains('js-anim') && img.getAttribute('src') !== src) {
+    img.classList.add('swap');
+    clearTimeout(img._t);
+    img._t = setTimeout(() => { img.src = src; }, 300);
+  } else {
+    img.src = src;
+  }
   document.getElementById('lightbox-counter').textContent = `${currentIndex + 1} / ${currentGallery.length}`;
   document.querySelectorAll('.lightbox-thumbs img').forEach((img, i) => {
     img.classList.toggle('active', i === currentIndex);
   });
+  restartProgress();
 }
+
+function autoOn() { return document.documentElement.classList.contains('js-anim'); }
+function restartProgress() {
+  const bar = document.querySelector('#lightbox-progress span');
+  bar.classList.remove('run');
+  void bar.offsetWidth;
+  if (autoOn()) bar.classList.add('run');
+  const im = document.getElementById('lightbox-img');
+  const startKb = () => { im.classList.remove('kb'); void im.offsetWidth; if (autoOn()) im.classList.add('kb'); };
+  if (im.classList.contains('swap')) setTimeout(startKb, 300); else startKb();
+  const next = currentGallery[(currentIndex + 1) % currentGallery.length];
+  if (next) { const pre = new Image(); pre.src = next; }
+}
+function togglePlay(e) {
+  if (e) e.stopPropagation();
+  const lb = document.getElementById('lightbox');
+  const paused = lb.classList.toggle('paused');
+  const btn = document.getElementById('lightbox-play');
+  btn.textContent = paused ? '►' : '❚❚';
+  const lbl = paused ? 'Reanudar presentación' : 'Pausar presentación';
+  btn.setAttribute('aria-label', document.documentElement.lang === 'en' && window.TLT_EN ? window.TLT_EN[lbl] : lbl);
+}
+(function () {
+  const lb = document.getElementById('lightbox');
+  const bar = document.querySelector('#lightbox-progress span');
+  bar.addEventListener('animationend', () => { if (lb.classList.contains('active')) nextPhoto(); });
+  const img = document.getElementById('lightbox-img');
+  const canHover = window.matchMedia('(hover: hover)').matches;
+  img.addEventListener('mouseenter', () => { if (canHover) lb.classList.add('hovering'); });
+  img.addEventListener('mouseleave', () => lb.classList.remove('hovering'));
+  img.addEventListener('click', (e) => { if (autoOn()) togglePlay(e); });
+  let x0 = null;
+  lb.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', (e) => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 45) { dx < 0 ? nextPhoto() : prevPhoto(); }
+  });
+})();
 
 function nextPhoto() { currentIndex = (currentIndex + 1) % currentGallery.length; showPhoto(); }
 function prevPhoto() { currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length; showPhoto(); }
 
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('active');
+  document.querySelector('#lightbox-progress span').classList.remove('run');
   document.body.style.overflow = '';
 }
 
@@ -622,6 +1013,197 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') prevPhoto();
   if (e.key === 'Escape') closeLightbox();
 });
+
+(function () {
+  const root = document.documentElement;
+  const lbImg = document.getElementById('lightbox-img');
+  const unswap = () => lbImg.classList.remove('swap');
+  lbImg.addEventListener('load', unswap);
+  lbImg.addEventListener('error', unswap);
+
+  const intro = document.getElementById('intro');
+  if (intro) {
+    if (!root.classList.contains('show-intro')) { intro.remove(); }
+    else {
+      intro.addEventListener('click', () => intro.classList.add('skip'));
+      intro.addEventListener('animationend', (e) => {
+        if (e.target === intro) { intro.remove(); }
+      });
+      setTimeout(() => { if (intro.isConnected) intro.remove(); }, 2500);
+    }
+  }
+
+  if (!root.classList.contains('js-anim')) return;
+
+  const sel = '.strip-item, .sec-head > *, .tour-card > *, .promise-img, .promise-label, .promise-title, .promise-quote, .promise-list li, .reviews-label, .reviews-title, .review-card, .reviews-source, .reviews-quote, .reviews-widget, .reviews-google, .base-map, .base-info';
+  const els = Array.from(document.querySelectorAll(sel));
+  if (!('IntersectionObserver' in window)) {
+    els.forEach((el) => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      const shown = entries.filter((e) => e.isIntersecting).map((e) => e.target)
+        .sort((a, b) => els.indexOf(a) - els.indexOf(b));
+      shown.forEach((el, i) => {
+        el.style.setProperty('--d', Math.min(i * 0.09, 0.6) + 's');
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    els.forEach((el) => io.observe(el));
+  }
+
+  const heroImg = document.querySelector('.hero-img img');
+  const hero = document.querySelector('.hero');
+  const promise = document.querySelector('.promise');
+  const promiseImg = document.querySelector('.promise-img img');
+  const desktop = window.matchMedia('(min-width: 769px)');
+  let ticking = false;
+  function update() {
+    ticking = false;
+    const vh = window.innerHeight;
+    if (hero && heroImg) {
+      const h = hero.offsetHeight;
+      const y = window.scrollY;
+      if (y <= h * 1.1) {
+        const p = Math.min(Math.max(y / h, 0), 1);
+        heroImg.style.setProperty('--hy', (p * h * 0.22).toFixed(1) + 'px');
+        heroImg.style.setProperty('--ho', (1 - p * 0.5).toFixed(3));
+      }
+    }
+    if (promise && promiseImg) {
+      if (desktop.matches) {
+        const r = promise.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < vh) {
+          const c = (r.top + r.height / 2 - vh / 2) / vh;
+          const py = Math.max(-24, Math.min(24, -c * 40));
+          promiseImg.style.setProperty('--py', py.toFixed(1) + 'px');
+        }
+      } else {
+        promiseImg.style.removeProperty('--py');
+      }
+    }
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+
+(function () {
+  const EN = window.TLT_EN = {
+ "Nosotros": "About us",
+ "Opiniones": "Reviews",
+ "Ubicación": "Location",
+ "El Salvador · Turismo Privado y Grupos Reducidos": "El Salvador · Private Tours & Small Groups",
+ "Pequeños grupos.": "Small groups.",
+ "Grandes": "Big",
+ "experiencias.": "experiences.",
+ "Volcanes, cascadas, cultura maya y la Ruta de las Flores. Diseñamos cada recorrido con la atención al detalle de un proyecto creativo y la cercanía de un amigo que conoce los mejores rincones.": "Volcanoes, waterfalls, Maya culture and the Flower Route. We design every trip with the eye for detail of a creative project and the warmth of a friend who knows the best spots.",
+ "Ver nuestros tours": "See our tours",
+ "Tours 100% privados": "100% private tours",
+ "Guías certificados": "Certified guides",
+ "Recogida en tu hotel": "Hotel pickup",
+ "Horarios a tu medida": "Flexible schedules",
+ "Nuestras experiencias": "Our experiences",
+ "Cada tour, una historia diferente": "Every tour, a different story",
+ "Las mejores experiencias no se cuentan, se viven.": "The best experiences aren't told, they're lived.",
+ "Naturaleza · Aventura": "Nature · Adventure",
+ "Naturaleza · Mirador": "Nature · Viewpoint",
+ "Agua · Playa · Montaña": "Water · Beach · Mountain",
+ "Cultura · Historia": "Culture · History",
+ "Internacional · UNESCO": "International · UNESCO",
+ "6 fotos": "6 photos",
+ "7 fotos": "7 photos",
+ "10 fotos": "10 photos",
+ "Cráter Sin Multitudes": "A Crater Without the Crowds",
+ "Agua, Roca y Mar": "Water, Rock and Sea",
+ "5 Pueblos, Origen y Tradición": "5 Towns, Roots and Tradition",
+ "La Ciudad Maya Más Escultural de América": "The Most Sculptural Maya City in the Americas",
+ "Volcán Santa Ana + Lago de Coatepeque": "Santa Ana Volcano + Lake Coatepeque",
+ "Volcán Izalco + Cerro Verde": "Izalco Volcano + Cerro Verde",
+ "Cascadas de Tamanique + El Tunco + Peñón de Comasagua": "Tamanique Waterfalls + El Tunco + Peñón de Comasagua",
+ "Ruta de las Flores": "Flower Route (Ruta de las Flores)",
+ "Ascenso al volcán más alto de El Salvador (2,381 msnm) con vista al cráter azufrado. Tarde de relax en las aguas cristalinas del Lago de Coatepeque.": "Climb El Salvador's highest volcano (2,381 m) and look down into its sulfur crater. Then enjoy a relaxing afternoon in the clear waters of Lake Coatepeque.",
+ "El Faro del Pacífico desde el mirador natural de Cerro Verde. Vistas únicas al volcán más joven de América Central en un entorno de bosque nuboso.": "The Lighthouse of the Pacific, seen from the natural viewpoint of Cerro Verde. Unique views of Central America's youngest volcano, surrounded by cloud forest.",
+ "Tres paisajes en un solo día: cascadas ocultas entre cañones de roca, la playa volcánica de El Tunco y el imponente peñón costero del Pacífico.": "Three landscapes in one day: hidden waterfalls in rocky canyons, the volcanic beach of El Tunco and a towering coastal rock on the Pacific.",
+ "Cinco pueblos coloniales del occidente salvadoreño: café de origen, artesanías, gastronomía local y arquitectura que cuenta siglos de historia viva.": "Five colonial towns in western El Salvador: single-origin coffee, crafts, local food and architecture that tells centuries of living history.",
+ "Patrimonio UNESCO desde 1980. Un día completo entre pirámides, estelas y la Escalera Jeroglífica más larga del mundo maya. Desde El Salvador, cruzando 3 países.": "A UNESCO World Heritage Site since 1980. A full day among pyramids, stelae and the longest Hieroglyphic Stairway in the Maya world. From El Salvador, across 3 countries.",
+ "Día completo": "Full day",
+ "Guía certificado": "Certified guide",
+ "Dificultad moderada": "Moderate difficulty",
+ "Medio día": "Half day",
+ "Bosque nuboso": "Cloud forest",
+ "3 destinos": "3 destinations",
+ "5 pueblos": "5 towns",
+ "14 horas": "14 hours",
+ "Guía local": "Local guide",
+ "Reservar por WhatsApp": "Book on WhatsApp",
+ "Nuestra promesa": "Our promise",
+ "Grupos reducidos,": "Small groups,",
+ "diseñados a la medida.": "tailor-made.",
+ "Grupos pequeños donde el detalle importa. El ritmo es tuyo, no del tour.": "Small groups where the details matter. You set the pace, not the tour.",
+ "Guías certificados que conocen cada rincón como un amigo local.": "Certified guides who know every corner like a local friend.",
+ "Recogida en tu hotel y regreso al mismo punto, sin complicaciones.": "Pickup at your hotel and drop-off at the same place, hassle-free.",
+ "Turismo de experiencia hecho a la medida del viajero curioso.": "Experience-based travel made for the curious traveler.",
+ "Aventura responsable que respeta el territorio y la cultura local.": "Responsible adventure that respects the land and the local culture.",
+ "Lo que dicen nuestros viajeros": "What our travelers say",
+ "Traducida": "Translated",
+ "Reseñas de": "Reviews from",
+ "¿Ya viviste la aventura con nosotros? Cuéntale al mundo cómo fue.": "Been on an adventure with us? Tell the world how it went.",
+ "Déjanos tu reseña en Google": "Review us on Google",
+ "Nuestra base": "Our base",
+ "Encuéntranos en Santa Ana": "Find us in Santa Ana",
+ "Desde aquí salimos a cada tour. Te recogemos en tu hotel y te regresamos al mismo punto.": "Every tour starts here. We pick you up at your hotel and bring you back to the same place.",
+ "Cómo llegar": "Directions",
+ "Síguenos en Instagram": "Follow us on Instagram",
+ "Míranos en Tripadvisor": "See us on Tripadvisor",
+ "Reserva en Viator": "Book on Viator",
+ "Escríbenos por WhatsApp": "Message us on WhatsApp",
+ "Mapa de la base de The Little Tour en Santa Ana": "Map of The Little Tour's base in Santa Ana",
+ "Pausar presentación": "Pause slideshow",
+ "Reanudar presentación": "Resume slideshow",
+ "Volcán Santa Ana": "Santa Ana Volcano",
+ "Cráter Volcán Santa Ana": "Santa Ana Volcano crater",
+ "Volcán Izalco, cima": "Izalco Volcano, summit",
+ "Volcán Izalco, vista": "Izalco Volcano, view",
+ "Cascadas de Tamanique": "Tamanique Waterfalls",
+ "Cascada Tamanique cañón": "Tamanique waterfall canyon",
+ "Pueblo Ruta de las Flores": "Flower Route town",
+ "Ruinas de Copán": "Copán ruins",
+ "Escultura Maya Copán": "Maya sculpture, Copán",
+ "The Little Tour, experiencia": "The Little Tour, experience"
+};
+  const nodes = [];
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode(n) {
+      if (n.parentElement.closest('script, style')) return NodeFilter.FILTER_REJECT;
+      return EN[n.nodeValue.trim()] !== undefined ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  while (walker.nextNode()) nodes.push([walker.currentNode, walker.currentNode.nodeValue]);
+  const attrs = [];
+  document.querySelectorAll('[alt], [title], [aria-label]').forEach((el) => {
+    ['alt', 'title', 'aria-label'].forEach((a) => {
+      const v = el.getAttribute(a);
+      if (v && EN[v] !== undefined) attrs.push([el, a, v]);
+    });
+  });
+  const wa = Array.from(document.querySelectorAll('a[href*="wa.me"][href*="text="]')).map((a) => [a, a.getAttribute('href')]);
+  const btns = document.querySelectorAll('.lang-switch button');
+  function setLang(l) {
+    document.documentElement.lang = l;
+    nodes.forEach(([n, es]) => { n.nodeValue = l === 'en' ? es.replace(es.trim(), EN[es.trim()]) : es; });
+    attrs.forEach(([el, a, es]) => el.setAttribute(a, l === 'en' ? EN[es] : es));
+    wa.forEach(([a, h]) => a.setAttribute('href', l === 'en' ? h.replace('Hola! Me interesa el tour', "Hi! I'm interested in the tour") : h));
+    btns.forEach((b) => b.classList.toggle('on', b.dataset.lang === l));
+    try { localStorage.setItem('tlt-lang', l); } catch (e) {}
+  }
+  btns.forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  let lang = null;
+  try { lang = localStorage.getItem('tlt-lang'); } catch (e) {}
+  if (lang !== 'es' && lang !== 'en') lang = (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
+  setLang(lang);
+})();
 </script>
 
 </body>
