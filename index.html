@@ -12,19 +12,19 @@ try{if(!sessionStorage.getItem('tlt-intro')){d.classList.add('show-intro');sessi
 })();
 </script>
 <style>
-@font-face{font-family:'Mosk';src:url('fonts/Mosk-900.ttf') format('truetype');font-weight:900}
-@font-face{font-family:'Mosk';src:url('fonts/Mosk-700.ttf') format('truetype');font-weight:700}
-@font-face{font-family:'Mosk';src:url('fonts/Mosk-500.ttf') format('truetype');font-weight:500}
-@font-face{font-family:'Mosk';src:url('fonts/Mosk-400.ttf') format('truetype');font-weight:400}
-@font-face{font-family:'Mosk';src:url('fonts/Mosk-300.ttf') format('truetype');font-weight:300}
-@font-face{font-family:'Lora';src:url('fonts/Lora-Regular.ttf') format('truetype');font-weight:400;font-style:normal}
-@font-face{font-family:'Lora';src:url('fonts/Lora-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal}
-@font-face{font-family:'Lora';src:url('fonts/Lora-Bold.ttf') format('truetype');font-weight:700;font-style:normal}
-@font-face{font-family:'Lora';src:url('fonts/Lora-Italic.ttf') format('truetype');font-weight:400;font-style:italic}
-@font-face{font-family:'Roboto';src:url('fonts/Roboto-Light.ttf') format('truetype');font-weight:300}
-@font-face{font-family:'Roboto';src:url('fonts/Roboto-Regular.ttf') format('truetype');font-weight:400}
-@font-face{font-family:'Roboto';src:url('fonts/Roboto-Medium.ttf') format('truetype');font-weight:500}
-@font-face{font-family:'Roboto';src:url('fonts/Roboto-Bold.ttf') format('truetype');font-weight:700}
+@font-face{font-family:'Mosk';src:url('fonts/Mosk-900.woff2') format('woff2'),url('fonts/Mosk-900.ttf') format('truetype');font-display:swap;font-weight:900}
+@font-face{font-family:'Mosk';src:url('fonts/Mosk-700.woff2') format('woff2'),url('fonts/Mosk-700.ttf') format('truetype');font-display:swap;font-weight:700}
+@font-face{font-family:'Mosk';src:url('fonts/Mosk-500.woff2') format('woff2'),url('fonts/Mosk-500.ttf') format('truetype');font-display:swap;font-weight:500}
+@font-face{font-family:'Mosk';src:url('fonts/Mosk-400.woff2') format('woff2'),url('fonts/Mosk-400.ttf') format('truetype');font-display:swap;font-weight:400}
+@font-face{font-family:'Mosk';src:url('fonts/Mosk-300.woff2') format('woff2'),url('fonts/Mosk-300.ttf') format('truetype');font-display:swap;font-weight:300}
+@font-face{font-family:'Lora';src:url('fonts/Lora-Regular.woff2') format('woff2'),url('fonts/Lora-Regular.ttf') format('truetype');font-display:swap;font-weight:400;font-style:normal}
+@font-face{font-family:'Lora';src:url('fonts/Lora-SemiBold.woff2') format('woff2'),url('fonts/Lora-SemiBold.ttf') format('truetype');font-display:swap;font-weight:600;font-style:normal}
+@font-face{font-family:'Lora';src:url('fonts/Lora-Bold.woff2') format('woff2'),url('fonts/Lora-Bold.ttf') format('truetype');font-display:swap;font-weight:700;font-style:normal}
+@font-face{font-family:'Lora';src:url('fonts/Lora-Italic.woff2') format('woff2'),url('fonts/Lora-Italic.ttf') format('truetype');font-display:swap;font-weight:400;font-style:italic}
+@font-face{font-family:'Roboto';src:url('fonts/Roboto-Light.woff2') format('woff2'),url('fonts/Roboto-Light.ttf') format('truetype');font-display:swap;font-weight:300}
+@font-face{font-family:'Roboto';src:url('fonts/Roboto-Regular.woff2') format('woff2'),url('fonts/Roboto-Regular.ttf') format('truetype');font-display:swap;font-weight:400}
+@font-face{font-family:'Roboto';src:url('fonts/Roboto-Medium.woff2') format('woff2'),url('fonts/Roboto-Medium.ttf') format('truetype');font-display:swap;font-weight:500}
+@font-face{font-family:'Roboto';src:url('fonts/Roboto-Bold.woff2') format('woff2'),url('fonts/Roboto-Bold.ttf') format('truetype');font-display:swap;font-weight:700}
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -665,7 +665,7 @@ html:not(.js-anim) .lightbox-auto { display: none; }
 
 <section class="hero">
   <div class="hero-img">
-    <img src="fotos/volcan-santa-2.jpg" alt="Volcán Santa Ana">
+    <img src="fotos/web/volcan-santa-2-grande.webp" alt="Volcán Santa Ana">
   </div>
   <div class="hero-content">
     <p class="hero-label">El Salvador · Turismo Privado y Grupos Reducidos</p>
@@ -694,8 +694,8 @@ html:not(.js-anim) .lightbox-auto { display: none; }
 
     <div class="tour-card">
       <div class="card-imgs" onclick="openGallery('volcan')" style="cursor:pointer">
-        <img class="pri" src="fotos/volcan-santa-2.jpg" alt="Volcán Santa Ana">
-        <img class="sec" src="fotos/volcan-santa-3.jpg" alt="Cráter Volcán Santa Ana">
+        <img class="pri" loading="lazy" decoding="async" src="fotos/web/volcan-santa-2.webp" alt="Volcán Santa Ana">
+        <img class="sec" loading="lazy" decoding="async" src="fotos/web/volcan-santa-3.webp" alt="Cráter Volcán Santa Ana">
         <span class="card-tag">Naturaleza · Aventura</span>
         <span class="gallery-count">6 fotos</span>
       </div>
@@ -714,8 +714,8 @@ html:not(.js-anim) .lightbox-auto { display: none; }
 
     <div class="tour-card">
       <div class="card-imgs" onclick="openGallery('izalco')" style="cursor:pointer">
-        <img class="pri" src="fotos/izalco-2.jpg" alt="Volcán Izalco, cima">
-        <img class="sec" src="fotos/izalco-3.jpg" alt="Volcán Izalco, vista">
+        <img class="pri" loading="lazy" decoding="async" src="fotos/web/izalco-2.webp" alt="Volcán Izalco, cima">
+        <img class="sec" loading="lazy" decoding="async" src="fotos/web/izalco-3.webp" alt="Volcán Izalco, vista">
         <span class="card-tag">Naturaleza · Mirador</span>
         <span class="gallery-count">7 fotos</span>
       </div>
@@ -733,8 +733,8 @@ html:not(.js-anim) .lightbox-auto { display: none; }
 
     <div class="tour-card">
       <div class="card-imgs" onclick="openGallery('tamanique')" style="cursor:pointer">
-        <img class="pri" src="fotos/tamanique-1.jpg" alt="Cascadas de Tamanique">
-        <img class="sec" src="fotos/tamanique-6.jpg" alt="Cascada Tamanique cañón">
+        <img class="pri" loading="lazy" decoding="async" src="fotos/web/tamanique-1.webp" alt="Cascadas de Tamanique">
+        <img class="sec" loading="lazy" decoding="async" src="fotos/web/tamanique-6.webp" alt="Cascada Tamanique cañón">
         <span class="card-tag">Agua · Playa · Montaña</span>
         <span class="gallery-count">7 fotos</span>
       </div>
@@ -752,8 +752,8 @@ html:not(.js-anim) .lightbox-auto { display: none; }
 
     <div class="tour-card">
       <div class="card-imgs" onclick="openGallery('ruta')" style="cursor:pointer">
-        <img class="pri" src="fotos/ruta-flores-1.jpg" alt="Ruta de las Flores">
-        <img class="sec" src="fotos/ruta-flores-2.jpg" alt="Pueblo Ruta de las Flores">
+        <img class="pri" loading="lazy" decoding="async" src="fotos/web/ruta-flores-1.webp" alt="Ruta de las Flores">
+        <img class="sec" loading="lazy" decoding="async" src="fotos/web/ruta-flores-2.webp" alt="Pueblo Ruta de las Flores">
         <span class="card-tag">Cultura · Historia</span>
         <span class="gallery-count">7 fotos</span>
       </div>
@@ -771,8 +771,8 @@ html:not(.js-anim) .lightbox-auto { display: none; }
 
     <div class="tour-card">
       <div class="card-imgs" onclick="openGallery('copan')" style="cursor:pointer">
-        <img class="pri" src="fotos/copan-1.jpg" alt="Ruinas de Copán">
-        <img class="sec" src="fotos/copan-2.jpg" alt="Escultura Maya Copán">
+        <img class="pri" loading="lazy" decoding="async" src="fotos/web/copan-1.webp" alt="Ruinas de Copán">
+        <img class="sec" loading="lazy" decoding="async" src="fotos/web/copan-2.webp" alt="Escultura Maya Copán">
         <span class="card-tag">Internacional · UNESCO</span>
         <span class="gallery-count">10 fotos</span>
       </div>
@@ -794,7 +794,7 @@ html:not(.js-anim) .lightbox-auto { display: none; }
 
 <section id="nosotros" class="promise">
   <div class="promise-img">
-    <img src="fotos/volcan-santa-2.jpg" alt="The Little Tour, experiencia">
+    <img loading="lazy" decoding="async" src="fotos/web/volcan-santa-2.webp" alt="The Little Tour, experiencia">
   </div>
   <div>
     <p class="promise-label">Nuestra promesa</p>
